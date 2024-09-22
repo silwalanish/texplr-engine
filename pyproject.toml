@@ -29,7 +29,7 @@ only-include = ["conanfile.py"]
 
 [tool.hatch.envs.windows.scripts]
 build = "conan build . --build=missing -pr:a=./conan/windows-release"
-debug = "conan build . --build=missing -pr:a=./conan/windows-debug"
+debug = "conan create . --build=missing -pr:a=./conan/windows-debug -u"
 
 [project.urls]
 Documentation = "https://github.com/silwalanish/texplr-engine#readme"
