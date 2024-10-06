@@ -6,7 +6,6 @@
 #include <string>
 
 #include "./surface/game_window.h"
-#include "./surface/glew_context.h"
 #include "./surface/glfw_context.h"
 
 namespace texplr {
@@ -28,9 +27,6 @@ struct ApplicationSpecification {
 
     uint16_t width;
     uint16_t height;
-
-    uint8_t glMajorVer;
-    uint8_t glMinorVer;
 };
 
 class Application {
@@ -54,7 +50,6 @@ private:
 
     std::unique_ptr<GLFWContext> m_glfwContext;
     std::shared_ptr<GameWindow> m_window;
-    std::unique_ptr<GLEWContext> m_glewContext;
 
     void OnWindowClose(const GameWindow& window);
 

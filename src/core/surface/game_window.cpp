@@ -34,11 +34,6 @@ void GameWindow::init()
     glfwSetCursorPos((GLFWwindow*)m_handle, 0, 0);
 }
 
-void GameWindow::swapBuffers()
-{
-    glfwSwapBuffers((GLFWwindow*)m_handle);
-}
-
 void GameWindow::destroy()
 {
     if (m_handle) {

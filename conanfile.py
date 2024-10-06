@@ -11,7 +11,6 @@ class TexplrEngineRecipe(ConanFile):
 
     def requirements(self):
         self.requires("glfw/3.4")
-        self.requires("glew/2.2.0")
         self.requires("glm/1.0.1")
         self.requires("eventpp/0.1.3")
         self.requires("rapidyaml/0.7.1")

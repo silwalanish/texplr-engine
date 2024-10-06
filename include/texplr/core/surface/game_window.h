@@ -23,7 +23,6 @@ public:
     ~GameWindow();
 
     void init();
-    void swapBuffers();
     void destroy();
 
     void* getNativeHandle() const;

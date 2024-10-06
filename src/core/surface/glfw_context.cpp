@@ -1,15 +1,15 @@
 #include <texplr/core/surface/glfw_context.h>
 
 #include <stdexcept>
+#include <string>
 
 #include <GLFW/glfw3.h>
 
 namespace texplr {
 
-GLFWContext::GLFWContext(uint8_t glMajorVer, uint8_t glMinorVer)
+GLFWContext::GLFWContext(const GLFWSpecification& specs)
     : m_isInitialized(false)
-    , m_glMajorVer(glMajorVer)
-    , m_glMinorVer(glMinorVer)
+    , m_specs(specs)
 {
 }
 
@@ -28,8 +28,11 @@ void GLFWContext::init()
         throw std::runtime_error("Couldn't initialize GLFW!");
     }
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, m_glMajorVer);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, m_glMinorVer);
+    glfwSetErrorCallback([](int error, const char* description) {
+        throw std::runtime_error(std::string(description));
+    });
+
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
     m_isInitialized = true;
 }
@@ -46,6 +49,11 @@ void GLFWContext::destroy()
 
         m_isInitialized = false;
     }
+}
+
+const GLFWSpecification& GLFWContext::getSpecs() const
+{
+    return m_specs;
 }
 
 } // namespace texplr

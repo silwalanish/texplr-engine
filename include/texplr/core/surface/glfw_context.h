@@ -1,22 +1,24 @@
 #pragma once
 
-#include <cstdint>
-
 namespace texplr {
+
+struct GLFWSpecification {
+};
 
 class GLFWContext {
 public:
-    GLFWContext(uint8_t glMajorVer, uint8_t glMinorVer);
+    GLFWContext(const GLFWSpecification& specs);
     ~GLFWContext();
 
     void init();
     void pollEvents();
     void destroy();
 
+    const GLFWSpecification& getSpecs() const;
+
 private:
     bool m_isInitialized;
-    uint8_t m_glMajorVer;
-    uint8_t m_glMinorVer;
+    GLFWSpecification m_specs;
 };
 
 } // namespace texplr

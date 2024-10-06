@@ -8,9 +8,8 @@ Application::Application(const ApplicationSpecification& specs)
     : m_specs(specs)
     , m_state(ApplicationState::CREATED)
 {
-    m_glfwContext = std::make_unique<GLFWContext>(m_specs.glMajorVer, m_specs.glMinorVer);
+    m_glfwContext = std::make_unique<GLFWContext>(GLFWSpecification {});
     m_window = std::make_shared<GameWindow>(WindowSpecification { m_specs.width, m_specs.height, m_specs.name });
-    m_glewContext = std::make_unique<GLEWContext>(m_window);
     m_windowEvents = eventpp::ScopedRemover<GameWindow>(*m_window.get());
 }
 
@@ -25,7 +24,6 @@ void Application::init()
 
     m_glfwContext->init();
     m_window->init();
-    m_glewContext->init();
 
     m_windowEvents.appendListener(WindowEvents::WINDOW_CLOSE, std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
 
@@ -46,8 +44,6 @@ void Application::run()
         currentTime = std::chrono::high_resolution_clock::now();
         deltaTime = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
         startTime = currentTime;
-
-        m_window->swapBuffers();
     }
 
     m_state = ApplicationState::STOPPED;
@@ -63,7 +59,6 @@ void Application::destroy()
     if (m_state != ApplicationState::DESTROYED) {
         m_windowEvents.reset();
 
-        m_glewContext->destroy();
         m_window->destroy();
         m_glfwContext->destroy();
 

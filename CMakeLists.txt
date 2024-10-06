@@ -5,7 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(GLFW3 REQUIRED)
 find_package(glm REQUIRED)
-find_package(GLEW REQUIRED)
 find_package(eventpp REQUIRED)
 find_package(ryml REQUIRED)
 
@@ -18,7 +17,7 @@ target_sources(${PROJECT_NAME} PRIVATE ${LIB_SOURCES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE GLFW_INCLUDE_NONE)
 target_link_libraries(${PROJECT_NAME}
-    PRIVATE glfw GLEW::GLEW ryml::ryml
+    PRIVATE glfw ryml::ryml
     PUBLIC glm::glm eventpp::eventpp)
 
 install(TARGETS ${PROJECT_NAME})

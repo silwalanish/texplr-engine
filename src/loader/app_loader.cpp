@@ -17,8 +17,6 @@ ApplicationSpecification AppLoader::loadSpecs(const std::string& path)
     tree["name"] >> specs.name;
     tree["width"] >> specs.width;
     tree["height"] >> specs.height;
-    tree["glMajorVersion"] >> specs.glMajorVer;
-    tree["glMinorVersion"] >> specs.glMinorVer;
 
     return specs;
 }
