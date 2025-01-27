@@ -10,9 +10,10 @@ Application::Application(const ApplicationSpecification& specs)
     : m_specs(specs)
     , m_state(ApplicationState::CREATED)
 {
-    m_glfwContext = std::make_unique<GLFWContext>(GLFWSpecification {});
+    m_glfwContext = std::make_shared<GLFWContext>(GLFWSpecification {});
     m_window = std::make_shared<GameWindow>(WindowSpecification { m_specs.width, m_specs.height, m_specs.name, m_specs.isResizable });
-    m_vulkanContext = std::make_unique<VulkanContext>(VulkanSpecification { m_specs.name, ENGINE }, m_window);
+    m_vulkanContext = std::make_shared<VulkanContext>(VulkanSpecification { m_specs.name, ENGINE }, m_window);
+    m_renderer = std::make_shared<Renderer>(RendererSpecification {}, m_vulkanContext);
     m_windowEvents = eventpp::ScopedRemover<GameWindow>(*m_window.get());
 }
 
